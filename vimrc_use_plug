@@ -49,6 +49,8 @@ Plug 'mattn/emmet-vim'
 Plug 'Valloric/MatchTagAlways'
 Plug 'fisadev/vim-isort'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 " :PlugInstall
