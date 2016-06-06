@@ -6,6 +6,7 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'christoomey/vim-run-interactive'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'keith/tmux.vim'
+Plug 'Shougo/unite.vim'
 Plug 'vim-scripts/mru.vim'
 Plug 'myint/syntastic-extras'
 Plug 'plasticboy/vim-markdown'
@@ -155,11 +156,11 @@ set winheight=999
 set rnu
 function! ToggleNumbersOn()
     set nu!
-    set rnu!
+    set rnu
 endfunction
 function! ToggleRelativeOn()
     set rnu!
-    set nu!
+    set nu
 endfunction
 autocmd FocusLost * call ToggleRelativeOn()
 autocmd FocusGained * call ToggleRelativeOn()
@@ -262,7 +263,7 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd ctermbg=lightgrey guibg=lightgrey
 hi IndentGuidesEven ctermbg=grey guibg=grey
-:nmap <silent><Leader>i <Plug>IndentGuidesToggle
+nmap <silent><Leader>i <Plug>IndentGuidesToggle
 
 "syntastic
 set statusline+=%#warningmsg#
@@ -287,6 +288,7 @@ let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_python_checkers = ['pyflakes_with_warnings']
 
 " Use neocomplete.
+let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
@@ -325,8 +327,13 @@ smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
 inoremap <expr><C-g> neocomplete#undo_completion()
 inoremap <expr><C-l> neocomplete#complete_common_string()
 inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
-" <CR>: close popup and save indent.
+" " <CR>: close popup and save indent.
 inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
+" <CR>: close popup and save indent.
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+    " return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+" endfunction
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
