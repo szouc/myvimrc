@@ -1,60 +1,68 @@
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/plugged')
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'christoomey/vim-run-interactive'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'keith/tmux.vim'
+Plug 'vim-scripts/mru.vim'
+Plug 'myint/syntastic-extras'
+Plug 'plasticboy/vim-markdown'
+Plug 'suan/vim-instant-markdown'
+" Plug 'Townk/vim-autoclose'
+Plug 'posva/vim-vue'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'hail2u/vim-css3-syntax'
+" Plug 'skammer/vim-css-color'
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/taglist.vim'
+Plug 'majutsushi/tagbar'
+Plug 'kien/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'mbbill/undotree'
+Plug 'easymotion/vim-easymotion'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
+Plug 'honza/vim-snippets'
+Plug 'scrooloose/syntastic'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'powerline/fonts'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'reedes/vim-colors-pencil'
+Plug 'altercation/vim-colors-solarized'
+Plug 'google/vim-colorscheme-primary'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'davidhalter/jedi-vim'
+Plug 'hdima/python-syntax'
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-surround'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'jiangmiao/simple-javascript-indenter'
+Plug 'mattn/emmet-vim'
+Plug 'Valloric/MatchTagAlways'
+Plug 'fisadev/vim-isort'
+Plug 'tpope/vim-fugitive'
+Plug 'endel/vim-github-colorscheme'
+Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-startify'
 
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
-" Plugin 'Townk/vim-autoclose'
-Plugin 'posva/vim-vue'
-Plugin 'othree/html5.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'hail2u/vim-css3-syntax'
-" Plugin 'skammer/vim-css-color'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'mbbill/undotree'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'Yggdroot/indentLine'
-Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/syntastic'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'powerline/fonts'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'reedes/vim-colors-pencil'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'google/vim-colorscheme-primary'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'hdima/python-syntax'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-surround'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'jiangmiao/simple-javascript-indenter'
-Plugin 'mattn/emmet-vim'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'fisadev/vim-isort'
-Plugin 'tpope/vim-fugitive'
-
-filetype plugin indent on
-
-call vundle#end()
-" :PluginInstall!
-" :PluginClean
+call plug#end()
+" :PlugInstall!
+" :PlugUpgrade
+"
+"
+let mapleader=','
+let g:mapleader=','
 
 syntax enable
 set t_Co=256
@@ -66,9 +74,25 @@ set background=dark
 " colorscheme PaperColor
 " colorscheme hybrid_material
 " colorscheme primary
-let g:solarized_termcolors=256
+" colors dracula
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
+" let g:solarized_contrast="normal"
+" let g:solarized_visibility="normal"
 colorscheme solarized
 " colorscheme pencil
+"
+    " Allow to trigger background
+function! ToggleBG()
+    let s:tbg = &background
+    " Inversion
+    if s:tbg == "dark"
+        set background=light
+    else
+        set background=dark
+    endif
+endfunction
+noremap <leader>bg :call ToggleBG()<CR>
 
 set encoding=utf-8
 " set ambiwidth=double
@@ -76,30 +100,74 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 set smarttab
+" Turn Backup off
 set nobackup
+set nowb
+set noswapfile
+set history=50
 set autoindent
 set smartindent
 set softtabstop=4
 set backspace=2
 set textwidth=79
 set number
+set numberwidth=5
+set ttyfast
+set mouse=a
 set mousemodel=popup
 set ruler
+" set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 set showcmd
+" set scrolljump=5
 set scrolloff=3
+" set sidescrolloff=15
+" set sidescroll=1
 set nowrap
+set colorcolumn=+1
 
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+set guifont=Inconsolata\ for\ Powerline:h12
 set cursorline
 " hi CursorLine cterm=NONE ctermbg=yellow guibg=yellow ctermfg=red guifg=red
 hi CursorLine cterm=NONE 
+hi clear SignColumn
+hi clear LineNr
 set colorcolumn=120
+" set visualbell
+set wildmenu
+set wildmode=list:longest,full
 
 set tags=tags
 
+" Display extra whitespace
+" set list listchars=tab:>>.,trail:.,nbsp:.
+
+set splitright
+" Auto resize Vim splits to active split
+set winwidth=104
+set winheight=5
+set winminheight=5
+set winheight=999
+
+" Toggle relative numbering, and set to absolute on loss of focus or insert mode
+set rnu
+function! ToggleNumbersOn()
+    set nu!
+    set rnu!
+endfunction
+function! ToggleRelativeOn()
+    set rnu!
+    set nu!
+endfunction
+autocmd FocusLost * call ToggleRelativeOn()
+autocmd FocusGained * call ToggleRelativeOn()
+autocmd InsertEnter * call ToggleRelativeOn()
+autocmd InsertLeave * call ToggleRelativeOn()
+
 let g:python_hightlight_all = 1
 let g:Python3Syntax = 1
-
-let g:mapleader=','
 let g:NERDSpaceDelims=1
 
 " airline
@@ -160,11 +228,11 @@ noremap <C-H> <C-W>h
 noremap <C-L> <C-W>l
 
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-let Tlist_Show_One_File = 1            "²»Í¬Ê±ÏÔÊ¾¶à¸öÎÄ¼þµÄtag£¬Ö»ÏÔÊ¾µ±Ç°ÎÄ¼þµÄ
+let Tlist_Show_One_File = 1   
 let Tlist_Auto_Update=1
-let Tlist_File_Fold_Auto_Close=1 " ·Çµ±Ç°ÎÄ¼þ£¬º¯ÊýÁÐ±íÕÛµþÒþ²Ø
-let Tlist_Exit_OnlyWindow = 1          "Èç¹ûtaglist´°¿ÚÊÇ×îºóÒ»¸ö´°¿Ú£¬ÔòÍË³övim
-let Tlist_Use_Right_Window = 1         "ÔÚÓÒ²à´°¿ÚÖÐÏÔÊ¾taglist´°¿Ú 
+let Tlist_File_Fold_Auto_Close=1
+let Tlist_Exit_OnlyWindow = 1  
+let Tlist_Use_Right_Window = 1
 
 " CtrlP
 nnoremap <Leader>fu :CtrlPFunky<Cr>
@@ -174,14 +242,14 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " NERDTREE
 map <F3> :NERDTreeToggle<CR>
 map <C-F3> :NERDTreeFind<CR>
-let NERDTreeChDirMode=2  "Ñ¡ÖÐroot¼´ÉèÖÃÎªµ±Ç°Ä¿Â¼
-let NERDTreeQuitOnOpen=1 "´ò¿ªÎÄ¼þÊ±¹Ø±ÕÊ÷
-let NERDTreeShowBookmarks=1 "ÏÔÊ¾ÊéÇ©
-let NERDTreeMinimalUI=0 "²»ÏÔÊ¾°ïÖúÃæ°å
-let NERDTreeDirArrows=0 "Ä¿Â¼¼ýÍ· 1 ÏÔÊ¾¼ýÍ·  0´«Í³+-|ºÅ
-let NERDTreeAutoCenter=1 " ¿ØÖÆµ±¹â±êÒÆ¶¯³¬¹ýÒ»¶¨¾àÀëÊ±£¬ÊÇ·ñ×Ô¶¯½«½¹µãµ÷Õûµ½ÆÁÖÐÐÄ
-let NERDTreeShowFiles=1 " ÊÇ·ñÄ¬ÈÏÏÔÊ¾ÎÄ¼þ
-let NERDTreeWinSize=30 " ´°¿Ú¿í
+let NERDTreeChDirMode=2 
+let NERDTreeQuitOnOpen=1
+let NERDTreeShowBookmarks=1
+let NERDTreeMinimalUI=0
+let NERDTreeDirArrows=0
+let NERDTreeAutoCenter=1
+let NERDTreeShowFiles=1
+let NERDTreeWinSize=30
 
 " Tagbar
 let g:tagbar_width=30
@@ -206,7 +274,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_python_exec = '/home/sz/anaconda3/bin/python'
-let g:syntastic_checkers=["pyflakes"]
+" let g:syntastic_checkers=["pyflakes"]
 " let g:syntastic_ignore_files = ['.py']
 nmap <F6> :cn<cr>
 nmap <F7> :cp<cr>
@@ -216,12 +284,16 @@ nmap <leader>e :Errors<CR>
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_python_checkers = ['pyflakes_with_warnings']
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_delimiter = 1
+let g:neocomplete#max_list = 15
+let g:neocomplete#force_overwrite_completefunc = 1
 let g:neocomplete#enable_fuzzy_completion = 1
 let g:neocomplete#enable_camel_case_completion = 1
 let g:neocomplete#enable_underbar_completion = 1
@@ -240,18 +312,19 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
-" " Define keyword.
-" if !exists('g:neocomplete#keyword_patterns')
-    " let g:neocomplete#keyword_patterns = {}
-" endif
-" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+smap <TAB> <Right><Plug>(neosnippet_jump_or_expand)
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
+inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
 " <CR>: close popup and save indent.
 inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
 " <TAB>: completion.
@@ -261,14 +334,6 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>" "
 
-" " SuperTab like snippets behavior.
-" imap <expr><TAB>
- " \ pumvisible() ? "\<C-n>" :
- " \ neosnippet#expandable_or_jumpable() ?
- " \    "\<TAB>" : "\<Plug>(neosnippet_expand_or_jump)"
-" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-" \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
@@ -277,7 +342,7 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
 
 " Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()
@@ -292,6 +357,9 @@ function! Multiple_cursors_after()
     exe 'NeoCompleteUnlock'
   endif
 endfunction
+" imap <silent><expr><C-k> neosnippet#expandable() ?
+            " \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
+            " \ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
 
 " set completeopt=longest,menu
 " autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -350,6 +418,30 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " Auto_Pairs
 let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 au BufNewFile,BufRead *.vue setf vue
+
+let MRU_Max_Entries = 400
+map <leader>f :MRU<CR>
+
+" Fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+" Mnemonic _i_nteractive
+nnoremap <silent> <leader>gi :Git add -p %<CR>
+nnoremap <silent> <leader>gg :SignifyToggle<CR>
+
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 1
