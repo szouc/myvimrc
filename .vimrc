@@ -15,6 +15,7 @@ Plug 'suan/vim-instant-markdown'
 Plug 'posva/vim-vue'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'hail2u/vim-css3-syntax'
 " Plug 'skammer/vim-css-color'
 Plug 'jiangmiao/auto-pairs'
@@ -97,8 +98,8 @@ noremap <leader>bg :call ToggleBG()<CR>
 
 set encoding=utf-8
 " set ambiwidth=double
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set expandtab
 set smarttab
 " Turn Backup off
@@ -108,7 +109,7 @@ set noswapfile
 set history=50
 set autoindent
 set smartindent
-set softtabstop=4
+set softtabstop=2
 set backspace=2
 set textwidth=79
 set number
