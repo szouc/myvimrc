@@ -1,0 +1,454 @@
+if &compatible
+  set nocompatible            " not compatible with vi
+endif
+" set autoread                " detect when a file is changed
+
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+filetype off
+
+if dein#load_state('~/.vim/plugged/autoload')
+  call dein#begin('~/.vim/plugged/autoload')
+  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
+  " call dein#add('Shougo/dein.vim')
+  call dein#add('yegappan/mru')
+  " call dein#add('plasticboy/vim-markdown')
+  " call dein#add('suan/vim-instant-markdown')
+  call dein#add('jiangmiao/auto-pairs')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('scrooloose/nerdtree')
+  " call dein#add('vim-scripts/taglist.vim')
+  " call dein#add('majutsushi/tagbar')
+  call dein#add('kien/ctrlp.vim')
+  call dein#add('tacahiroy/ctrlp-funky')
+  " call dein#add('mbbill/undotree')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('nathanaelkane/vim-indent-guides')
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('MarcWeber/vim-addon-mw-utils')
+  call dein#add('tomtom/tlib_vim')
+  call dein#add('garbas/vim-snipmate')
+  call dein#add('honza/vim-snippets')
+  call dein#add('bling/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  " call dein#add('powerline/fonts')
+  call dein#add('NLKNguyen/papercolor-theme')
+  call dein#add('reedes/vim-colors-pencil')
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('google/vim-colorscheme-primary')
+  call dein#add('kristijanhusak/vim-hybrid-material')
+  " call dein#add('hynek/vim-python-pep8-indent')
+  call dein#add('ervandew/supertab')
+  call dein#add('tpope/vim-surround')
+  call dein#add('kien/rainbow_parentheses.vim')
+  call dein#add('sheerun/vim-polyglot')
+  call dein#add('jiangmiao/simple-javascript-indenter')
+  call dein#add('othree/html5.vim', { 'for': 'html' }) " html5 support
+  call dein#add('mattn/emmet-vim')
+  call dein#add('Valloric/MatchTagAlways')
+  " call dein#add('fisadev/vim-isort')
+  " call dein#add('tpope/vim-fugitive')
+  " call dein#add('endel/vim-github-colorscheme')
+  " call dein#add('airblade/vim-gitgutter')
+  call dein#add('mhinz/vim-startify')
+  " call dein#add('equalsraf/neovim-gui-shim')
+  " call dein#add('roxma/nvim-completion-manager')
+  call dein#add('AndrewRadev/splitjoin.vim') " single/multi line code handler: gS - split one line into multiple, gJ - combine multiple lines into one
+  call dein#add('w0rp/ale')
+
+  " JavaScript
+  call dein#add('pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] })
+  call dein#add('moll/vim-node', { 'for': 'javascript' }) " node support
+  call dein#add('mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] }) " JSX support
+  call dein#add('ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' })
+
+  call dein#add('joshdick/onedark.vim')
+  call dein#add('chriskempson/base16-vim')
+  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Open vim and install dein
+" :call dein#install()
+" if dein#check_install()
+  " call dein#install()
+" endif
+
+
+filetype plugin indent on
+syntax enable
+
+let mapleader=','
+let g:mapleader=','
+
+syntax on
+" set t_Co=256
+set laststatus=2
+" let g:pencil_higher_contrast_ui = 0  " 0=low, 1=high
+" let g:enable_bold_font = 1
+" set background=light
+" set background=dark
+" colorscheme PaperColor
+" colorscheme hybrid_material
+" colorscheme primary
+" colors dracula
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
+" let g:solarized_contrast="normal"
+" let g:solarized_visibility="normal"
+" colorscheme solarized
+" colorscheme pencil
+colorscheme onedark
+"
+" Allow to trigger background
+function! ToggleBG()
+  let s:tbg = &background
+  " Inversion
+  if s:tbg == "dark"
+    set background=light
+  else
+    set background=dark
+  endif
+endfunction
+noremap <leader>bg :call ToggleBG()<CR>
+
+" switch cursor to line when in insert mode, and block when not
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+\,sm:block-blinkwait175-blinkoff150-blinkon175
+
+if &term =~ '256color'
+" disable background color erase
+  set t_ut=
+endif
+
+" make the highlighting of tabs and other non-text less annoying
+highlight SpecialKey ctermbg=none ctermfg=236
+highlight NonText ctermbg=none ctermfg=236
+
+" make comments and HTML attributes italic
+highlight Comment cterm=italic
+highlight htmlArg cterm=italic
+highlight xmlAttrib cterm=italic
+highlight Normal ctermbg=none
+
+set encoding=utf-8
+"set ambiwidth=double
+set shiftwidth=2
+set tabstop=2
+set expandtab
+set smarttab
+" Turn Backup off
+set nobackup
+set nowb
+set noswapfile
+set history=50
+set autoindent
+set smartindent
+set softtabstop=2
+set textwidth=79
+set number
+set numberwidth=5
+set ttyfast
+set mouse=a
+set mousemodel=popup
+set ruler
+" set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+set showcmd
+set vb t_vb=
+" set scrolljump=5
+set scrolloff=3
+" set sidescrolloff=15
+" set sidescroll=1
+set nowrap
+set colorcolumn=+1
+set linebreak
+set showbreak=...
+set showcmd
+set noshowmode
+set title
+
+" toggle invisible characters
+set list
+set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set showbreak=↪
+
+" highlight conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+" make backspace behave in a sane manner
+set backspace=indent,eol,start
+
+" set guifont=Courier_new:h14
+set guifont=Fira_Code:h18
+set cursorline
+" hi CursorLine cterm=NONE ctermbg=yellow guibg=yellow ctermfg=red guifg=red
+hi CursorLine cterm=NONE
+hi clear SignColumn
+hi clear LineNr
+set colorcolumn=120
+" set visualbell
+set wildmenu
+set wildmode=list:longest,full
+
+set tags=tags
+
+" Toggle relative numbering, and set to absolute on loss of focus or insert mode
+set rnu
+function! ToggleNumbersOn()
+  set nu!
+  set rnu
+endfunction
+function! ToggleRelativeOn()
+  set rnu!
+  set nu
+endfunction
+autocmd FocusLost * call ToggleRelativeOn()
+autocmd FocusGained * call ToggleRelativeOn()
+autocmd InsertEnter * call ToggleRelativeOn()
+autocmd InsertLeave * call ToggleRelativeOn()
+
+" let g:python_hightlight_all = 1
+let g:Python3Syntax = 1
+let g:NERDSpaceDelims=1
+
+inoremap jj <esc>
+
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tab_min_count = 2
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#ale#enabled = 1
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+" let g:airline_section_b = '%{strftime("%c")}'
+" let g:airline_theme = 'solarized'
+" let g:airline_theme = 'PaperColor'
+" let g:airline_theme = 'pencil'
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+" unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.maxlinenr = '☰'
+" let g:airline_symbols.maxlinenr = ''
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.spell = 'Ꞩ'
+" let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.whitespace = 'Ξ'
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+nnoremap <Up> <C-w>10+
+nnoremap <Down> <C-w>10-
+nnoremap <Left> <C-w>10<
+nnoremap <right> <C-w>10>
+
+noremap <C-J> <C-W>j
+noremap <C-K> <C-W>k
+noremap <C-H> <C-W>h
+noremap <C-L> <C-W>l
+
+" let Tlist_Ctags_Cmd = '~/AppData/Local/nvim/ctags.exe'
+" let Tlist_Show_One_File = 1
+" let Tlist_Auto_Update=1
+" let Tlist_File_Fold_Auto_Close=1
+" let Tlist_Exit_OnlyWindow = 1
+" let Tlist_Use_Right_Window = 1
+
+" CtrlP
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+" NERDTREE
+" map <F3> :NERDTreeToggle<CR>
+" map <C-F3> :NERDTreeFind<CR>
+" Toggle NERDTree
+nmap <silent> <leader>k :NERDTreeToggle<cr>
+" expand to the path of the file in the current buffer
+nmap <silent> <leader>y :NERDTreeFind<cr>
+let NERDTreeChDirMode=2
+let NERDTreeQuitOnOpen=1
+let NERDTreeShowBookmarks=1
+let NERDTreeMinimalUI=0
+let NERDTreeDirArrows=0
+let NERDTreeAutoCenter=1
+let NERDTreeShowFiles=1
+let NERDTreeWinSize=30
+
+" Tagbar
+" let g:tagbar_width=30
+" nmap <F2> :TagbarToggle<CR>
+
+" indent_guides
+let g:indent_guides_enable_on_vim_startup = 0
+" let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd ctermbg=lightgrey guibg=lightgrey
+hi IndentGuidesEven ctermbg=grey guibg=grey
+:nmap <silent><Leader>i <Plug>IndentGuidesToggle
+
+"syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_python_python_exec = 'C:/Anaconda3/python'
+" let g:syntastic_checkers=["pyflakes"]
+" " let g:syntastic_ignore_files = ['.py']
+" nmap <F6> :cn<cr>
+" nmap <F7> :cp<cr>
+" " show list of errors and warnings on the current file
+" nmap <leader>e :Errors<CR>
+" " don't put icons on the sign column (it hides the vcs status icons of signify)
+" let g:syntastic_enable_signs = 1
+" let g:syntastic_error_symbol = "✗"
+" let g:syntastic_warning_symbol = "⚠"
+" let g:syntastic_python_checkers = ['pyflakes_with_warnings']
+
+" set completeopt=longest,menu
+" autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+" autocmd FileType python setlocal omnifunc=python3complete#Complete
+" autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType java set omnifunc=javacomplete#Complete
+
+" jedi
+" autocmd FileType python setlocal omnifunc=jedi#completions
+" let g:jedi#auto_initialization = 1
+" let g:jedi#use_tabs_not_buffers = 1
+" let g:jedi#popup_on_dot = 1
+" let g:jedi#popup_select_first = 1
+" let g:jedi#auto_close_doc = 1
+" let g:jedi#show_call_signatures = 1
+" let g:jedi#force_py_version = 3
+" let g:jedi#completions_enabled = 1
+" let g:jedi#auto_vim_configuration = 0
+
+" Undotree
+" nnoremap <F5> :UndotreeToggle<cr>
+" if has("persistent_undo")
+" set undodir='~/.undodir/'
+" set undofile
+" endif
+
+" vim-isort
+" let g:vim_isort_map = '<C-i>'
+
+let g:rbpt_colorpairs = [
+\ ['brown',       'RoyalBlue3'],
+\ ['Darkblue',    'SeaGreen3'],
+\ ['darkgray',    'DarkOrchid3'],
+\ ['darkgreen',   'firebrick3'],
+\ ['darkcyan',    'RoyalBlue3'],
+\ ['darkred',     'SeaGreen3'],
+\ ['darkmagenta', 'DarkOrchid3'],
+\ ['brown',       'firebrick3'],
+\ ['gray',        'RoyalBlue3'],
+\ ['black',       'SeaGreen3'],
+\ ['darkmagenta', 'DarkOrchid3'],
+\ ['Darkblue',    'firebrick3'],
+\ ['darkgreen',   'RoyalBlue3'],
+\ ['darkcyan',    'SeaGreen3'],
+\ ['darkred',     'DarkOrchid3'],
+\ ['red',         'firebrick3'],
+\ ]
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" Auto_Pairs
+let g:AutoPairsFlyMode = 0
+
+" au BufNewFile,BufRead *.vue setf vue
+
+let MRU_Max_Entries = 400
+map <leader>f :MRU<CR>
+
+" " Fugitive
+" nnoremap <silent> <leader>gs :Gstatus<CR>
+" nnoremap <silent> <leader>gd :Gdiff<CR>
+" nnoremap <silent> <leader>gc :Gcommit<CR>
+" nnoremap <silent> <leader>gb :Gblame<CR>
+" nnoremap <silent> <leader>gl :Glog<CR>
+" nnoremap <silent> <leader>gp :Git push<CR>
+" nnoremap <silent> <leader>gr :Gread<CR>
+" nnoremap <silent> <leader>gw :Gwrite<CR>
+" nnoremap <silent> <leader>ge :Gedit<CR>
+" " Mnemonic _i_nteractive
+" nnoremap <silent> <leader>gi :Git add -p %<CR>
+" nnoremap <silent> <leader>gg :SignifyToggle<CR>
+" nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+"let g:tmux_navigator_no_mappings = 1
+"let g:tmux_navigator_save_on_switch = 1
+"set guioptions-=m " 隐藏菜单栏
+"set guioptions-=T " 隐藏工具栏
+"set guioptions-=L " 隐藏左侧滚动条
+"set guioptions-=r " 隐藏右侧滚动条
+"set guioptions-=b " 隐藏底部滚动条
+"set showtabline=0 " 隐藏Tab栏
+
+""默认窗口位置和大小
+"" winpos 235 235
+"" set lines=25 columns=108
+
+let g:python3_host_prog='C:/Anaconda3/python.exe'
+
+" Asynchronous Lint Engine
+let g:ale_change_sign_column_color = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
+let g:ale_statusline_format = ['X %d', '? %d', '']
+let g:ale_echo_msg_format = '%linter% says %s'
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
+
+let g:ale_linters = {
+\   'javascript': ['eslint', 'flow', 'standard'],
+\   'typescript': ['tslint', 'tsserver']
+\}
+
+" let g:startify_session_autoload = 1
+" let g:deoplete#enable_at_startup = 1
